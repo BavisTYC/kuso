@@ -1,0 +1,332 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <title>我與酷獸的大冒險</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/bootstrap4-modal-fullscreen.css" />
+    <script>
+      //--建立觸控監聽，當瀏覽器開啟頁面時，觸控式螢幕幕觸發事件，進行音訊播放
+      document.addEventListener("touchstart", function () {
+        function audioAutoPlay() {
+          var audio = document.getElementById("audio");
+          audio.play();
+        }
+        audioAutoPlay();
+      });
+    </script>
+
+    <style>
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        background: #000;
+      }
+
+      .ham {
+        width: 70px;
+        height: 70px;
+        border-radius: 5px;
+        background: rgba(0, 0, 0, 0);
+        display: block;
+        position: relative;
+        z-index: 999;
+      }
+
+      .ham-origin {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 999;
+      }
+
+      .ham-bar {
+        height: 4px;
+        width: 26px;
+        position: absolute;
+        background: rgb(41, 32, 173);
+        margin: 1px 0 0 -13px;
+        transition: all 0.5s;
+      }
+      .ham-bar::after {
+        background: rgb(255, 255, 255);
+      }
+
+      .ham-bar--top {
+        transform: translateY(-8px);
+      }
+
+      .ham-bar--bottom {
+        transform: translateY(8px);
+      }
+
+      #nav-toggle {
+        display: none;
+      }
+
+      #nav-toggle:checked ~ .ham .ham-bar--middle {
+        opacity: 0;
+      }
+
+      #nav-toggle:checked ~ .ham .ham-bar--top {
+        transform: rotate(-45deg);
+        background: #fff;
+      }
+
+      #nav-toggle:checked ~ .ham .ham-bar--bottom {
+        transform: rotate(45deg);
+        background: #fff;
+      }
+
+      /* Nav Style */
+
+      .menu {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        padding: 90px 20px 15px 20px;
+        background: rgba(150, 160, 180, 0.8);
+        /* 用 translate 把選單藏到畫面右邊去 */
+        transform: translateX(-100%);
+        transition: transform 0.5s;
+        z-index: 99;
+      }
+
+      #nav-toggle:checked ~ .menu {
+        transform: none;
+      }
+
+      .menu-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .menu-item + .menu-item {
+        margin-top: 0px;
+      }
+      .menu-item {
+        padding: 20px 40px;
+        border-top: 1px solid #fff;
+      }
+      .menu-item:last-child {
+        border-bottom: 1px solid #fff;
+      }
+
+      .menu-link {
+        text-decoration: none;
+        color: white;
+      }
+
+      /* Box styles */
+      .box {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center; /*水平置中*/
+        align-items: center; /*垂直置中*/
+      }
+
+      .box:after {
+        padding-top: 56.28%; /*1:2 ratio*/
+        display: block;
+        content: "";
+      }
+      .chatbox {
+        position: absolute;
+        width: 100%;
+        height: 30%;
+        left: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center; /*水平置中*/
+        align-items: center; /*垂直置中*/
+      }
+      .chatbox2 {
+        height: 100%;
+        width: 60%;
+        background-image: url(./img/chatboxBg.png);
+        background-size: cover;
+        left: 0;
+        bottom: 0;
+      }
+      .chatbox2 p {
+        font-size: 1rem;
+        margin-top: 10%;
+        padding-left: 24%;
+        padding-right: 8%;
+        padding-bottom: 0;
+        margin-bottom: 0;
+      }
+      .chatbox2 p.chatboxBtn {
+        text-align: right;
+        margin: 0;
+        padding: 0;
+        padding-right: 8%;
+        color: rgb(29, 156, 135);
+      }
+
+      /* Style that should be applied to the box content */
+      .info {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-image: url(./img/indexBg.png);
+        background-size: cover;
+        overflow: hidden;
+      }
+      .infoTitle {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        bottom: 0;
+      }
+      .infoTitle img {
+        width: 100%;
+        height: 100%;
+        display: inline;
+      }
+      .vid03 {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        bottom: 0;
+        display: inline-block;
+      }
+      .indexMenu {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        bottom: 0;
+        display: inline-block;
+      }
+      .indexMenu img {
+        height: 97%;
+        width: auto;
+        display: inline-block;
+      }
+      .zindex-2 {
+        z-index: 2;
+      }
+      .zindex-3 {
+        z-index: 3;
+      }
+      .zindex-4 {
+        z-index: 4;
+      }
+      .zindex-5 {
+        z-index: 5;
+      }
+      .zindex-6 {
+        z-index: 6;
+      }
+      .zindex-7 {
+        z-index: 999;
+      }
+      .aMask1 {
+        position: absolute;
+        display: inline-block;
+        width: 12%;
+        height: 33%;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.2);
+        top: 30%;
+        left: 30%;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="home box">
+      <div id="content" class="info">
+        <input id="nav-toggle" type="checkbox" />
+        <label for="nav-toggle" class="ham">
+          <div class="ham-origin">
+            <div class="ham-bar ham-bar--top"></div>
+            <div class="ham-bar ham-bar--middle"></div>
+            <div class="ham-bar ham-bar--bottom"></div>
+          </div>
+        </label>
+
+        <nav class="menu">
+          <ul class="menu-list">
+            <li class="menu-item">
+              <a class="menu-link" href="#">我與酷獸的大冒險</a>
+            </li>
+            <li class="menu-item">
+              <a class="menu-link" href="#">大家的博物館</a>
+            </li>
+          </ul>
+        </nav>
+
+        <video
+          poster=""
+          id="movTxtAni"
+          class="vid03 zindex-5"
+          playsinline
+          muted
+          loop
+          preload="metadata"
+          autoplay="autoplay"
+        >
+          <!--
+            - Video needs to be muted, since Chrome 66+ will not autoplay video with sound.
+            WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
+          <source src="mv/indexBg.webm" type="video/webm" />
+          <source src="#" type="video/mp4" />
+        </video>
+        <div class="indexMenu">
+          <a href="3/game.html" class="aMask1 zindex-7"></a>
+          <img src="img/m01.png" alt="" />
+          <img src="img/m02.png" alt="" />
+          <img src="img/m03.png" alt="" />
+          <img src="img/m04.png" alt="" />
+          <<img src="img/m05.png" alt="" />
+        </div>
+        <div class="infoTitle">
+          <img src="img/indexGif.png" alt="" />
+        </div>
+        <div class="chatbox zindex-6">
+          <div class="chatbox2">
+            <p>
+              這是說明文字這是說明文字這是說明文字這是說明文字這是說明文字這是說明文字這是說明文字
+            </p>
+            <p class="chatboxBtn">▼</p>
+          </div>
+        </div>
+        <div class="infoTitle zindex-6">
+          <div>
+            <img src="img/indexStar.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- partial -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/javascript" src="func.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
+      integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA="
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

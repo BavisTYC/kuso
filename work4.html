@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <title>桃園市立美術館</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/bootstrap4-modal-fullscreen.css" />
+    <script>
+      //--建立觸控監聽，當瀏覽器開啟頁面時，觸控式螢幕幕觸發事件，進行音訊播放
+      document.addEventListener('touchstart', function () {
+          function audioAutoPlay() {
+              var audio = document.getElementById('audio');
+                  audio.play();
+          }
+          audioAutoPlay();
+      });    
+    </script>
+  </head>
+  <body>
+      <audio id="audio" src="mv/04moon nipple_s.mp3" autoplay loop hidden preload="auto"></audio>
+      <div id="preloader">
+          <div class="loadpng"><img src="img/loading.png" alt="" /></div>
+      </div>
+      <div class="topmain">
+          <!-- partial:index.partial.html -->
+          <video poster=""
+                 id="movTxtAni"
+                 class="vid01"
+                 playsinline
+                 muted
+                 preload="metadata">
+              <!--
+            - Video needs to be muted, since Chrome 66+ will not autoplay video with sound.
+            WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
+              <source src="mv/04moon nipple_wd.webm" type="video/webm" />
+              <source src="#" type="video/mp4" />
+          </video>
+          <video poster="#"
+                 class="vid02"
+                 id="movBox"
+                 playsinline
+                 muted
+                 loop
+                 preload="metadata">
+              <!--
+            - Video needs to be muted, since Chrome 66+ will not autoplay video with sound.
+            WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
+              <source src="#" type="video/webm" />
+              <source src="mv/04moon nipple_m.mp4" type="video/mp4" />
+          </video>
+      </div>
+      <div id="navmenu">
+          <ul>
+              <li>
+                  <a href="###" id="btnTxtAni">
+                      <span>Moon Nipple</span><img src="img/nav02-3-4.png" alt="Moon Nipple" />
+                  </a>
+              </li>
+              <li>
+                  <a id="linkVideo" href="###">
+                      <span>觀賞全景</span><img src="img/nav02-more.png" alt="觀賞全景" />
+                  </a>
+              </li>
+          </ul>
+          <!-- <button>Pause</button> -->
+      </div>
+
+      <div class="align-r backicon navhome">
+          <a href="./index.html"><img src="img/nav-back.png" alt="Home" /></a>
+      </div>
+
+      <div class="modal fade"
+           id="exampleModalCenter"
+           tabindex="-1"
+           role="dialog"
+           aria-labelledby="exampleModalCenterTitle"
+           aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content modal-contentbg2">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">作品說明</h5>
+                      <button type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <p>作品說明作品說明作品說明作品說明作品說明</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- partial -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+              integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+              crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+              integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+              crossorigin="anonymous"></script>
+      <script>
+          $(function () {
+              console.log(navigator.userAgent);
+              var isMobile = false;
+              if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+                  $('#movBox')[0].src = "mv/mobile/04.mp4";
+                  $('#movBox')[0].load();
+                  $('#movBox')[0].play();
+                  $("#btnTxtAni").hide();
+                  isMobile = true;
+              } else {
+                  /*$('#movBox')[0].src = "mv/01peaceful-bliss-meditation_s.mp3";
+                  $('#movBox')[0].load();*/
+                  $('#movBox')[0].play();
+              }
+              $("#btnTxtAni").click(function () {
+                  $("#movTxtAni")[0].play();
+              });
+              var isFullMov = true;
+              $("#linkVideo").click(function () {
+                  isFullMov = !isFullMov;
+                  if (isFullMov) {
+                      $(this).find('span').text('觀賞全景');
+                      if (!isMobile) {
+                          $("#btnTxtAni").show();
+                          $('#movBox')[0].src = "mv/04moon nipple_m.mp4";
+                      }
+                      else {
+                          $('#movBox')[0].src = "mv/mobile/04.mp4";
+                      }
+                      $('#movBox')[0].load();
+                      $('#movBox')[0].play();
+                  }
+                  else {
+                      $("#btnTxtAni").hide();
+                      $(this).find('span').text('觀賞細節');
+                      $('#movBox')[0].src = "mv/04moon nipple.mp4";
+                      $('#movBox')[0].load();
+                      $('#movBox')[0].play();
+                  }
+                  
+              });
+          });
+      </script>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async
+              src="https://www.googletagmanager.com/gtag/js?id=G-J2CV25ZE3Q"></script>
+      <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+              dataLayer.push(arguments);
+          }
+          gtag("js", new Date());
+
+          gtag("config", "G-J2CV25ZE3Q");
+      </script>
+      <script>
+          var loader = document.getElementById("preloader");
+
+          window.addEventListener("load", function () {
+              loader.style.display = "none";
+          });
+      </script>
+  </body>
+</html>
