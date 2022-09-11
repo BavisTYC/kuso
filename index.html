@@ -3,252 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <title>我與酷獸的大冒險</title>
-    <link rel="stylesheet" href="css/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="css/bootstrap4-modal-fullscreen.css" />
-    <script>
-      //--建立觸控監聽，當瀏覽器開啟頁面時，觸控式螢幕幕觸發事件，進行音訊播放
-      document.addEventListener("touchstart", function () {
-        function audioAutoPlay() {
-          var audio = document.getElementById("audio");
-          audio.play();
-        }
-        audioAutoPlay();
-      });
-    </script>
+    <link rel="stylesheet" href="css/style.css" />
 
-    <style>
-      html,
-      body {
-        height: 100%;
-        width: 100%;
-        background: #000;
-      }
-
-      .ham {
-        width: 70px;
-        height: 70px;
-        border-radius: 5px;
-        background: rgba(0, 0, 0, 0);
-        display: block;
-        position: relative;
-        z-index: 999;
-      }
-
-      .ham-origin {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        z-index: 999;
-      }
-
-      .ham-bar {
-        height: 4px;
-        width: 26px;
-        position: absolute;
-        background: rgb(41, 32, 173);
-        margin: 1px 0 0 -13px;
-        transition: all 0.5s;
-      }
-      .ham-bar::after {
-        background: rgb(255, 255, 255);
-      }
-
-      .ham-bar--top {
-        transform: translateY(-8px);
-      }
-
-      .ham-bar--bottom {
-        transform: translateY(8px);
-      }
-
-      #nav-toggle {
-        display: none;
-      }
-
-      #nav-toggle:checked ~ .ham .ham-bar--middle {
-        opacity: 0;
-      }
-
-      #nav-toggle:checked ~ .ham .ham-bar--top {
-        transform: rotate(-45deg);
-        background: #fff;
-      }
-
-      #nav-toggle:checked ~ .ham .ham-bar--bottom {
-        transform: rotate(45deg);
-        background: #fff;
-      }
-
-      /* Nav Style */
-
-      .menu {
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        padding: 90px 20px 15px 20px;
-        background: rgba(150, 160, 180, 0.8);
-        /* 用 translate 把選單藏到畫面右邊去 */
-        transform: translateX(-100%);
-        transition: transform 0.5s;
-        z-index: 99;
-      }
-
-      #nav-toggle:checked ~ .menu {
-        transform: none;
-      }
-
-      .menu-list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      .menu-item + .menu-item {
-        margin-top: 0px;
-      }
-      .menu-item {
-        padding: 20px 40px;
-        border-top: 1px solid #fff;
-      }
-      .menu-item:last-child {
-        border-bottom: 1px solid #fff;
-      }
-
-      .menu-link {
-        text-decoration: none;
-        color: white;
-      }
-
-      /* Box styles */
-      .box {
-        width: 100vw;
-        height: 100vh;
-        position: relative;
-        display: inline-block;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        justify-content: center; /*水平置中*/
-        align-items: center; /*垂直置中*/
-      }
-
-      .box:after {
-        padding-top: 56.28%; /*1:2 ratio*/
-        display: block;
-        content: "";
-      }
-      .chatbox {
-        position: absolute;
-        width: 100%;
-        height: 30%;
-        left: 0;
-        bottom: 0;
-        display: flex;
-        justify-content: center; /*水平置中*/
-        align-items: center; /*垂直置中*/
-      }
-      .chatbox2 {
-        height: 100%;
-        width: 60%;
-        background-image: url(./img/chatboxBg.png);
-        background-size: cover;
-        left: 0;
-        bottom: 0;
-      }
-      .chatbox2 p {
-        font-size: 1rem;
-        margin-top: 10%;
-        padding-left: 24%;
-        padding-right: 8%;
-        padding-bottom: 0;
-        margin-bottom: 0;
-      }
-      .chatbox2 p.chatboxBtn {
-        text-align: right;
-        margin: 0;
-        padding: 0;
-        padding-right: 8%;
-        color: rgb(29, 156, 135);
-      }
-
-      /* Style that should be applied to the box content */
-      .info {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background-image: url(./img/indexBg.png);
-        background-size: cover;
-        overflow: hidden;
-      }
-      .infoTitle {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        bottom: 0;
-      }
-      .infoTitle img {
-        width: 100%;
-        height: 100%;
-        display: inline;
-      }
-      .vid03 {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        bottom: 0;
-        display: inline-block;
-      }
-      .indexMenu {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        bottom: 0;
-        display: inline-block;
-      }
-      .indexMenu img {
-        height: 97%;
-        width: auto;
-        display: inline-block;
-      }
-      .zindex-2 {
-        z-index: 2;
-      }
-      .zindex-3 {
-        z-index: 3;
-      }
-      .zindex-4 {
-        z-index: 4;
-      }
-      .zindex-5 {
-        z-index: 5;
-      }
-      .zindex-6 {
-        z-index: 6;
-      }
-      .zindex-7 {
-        z-index: 999;
-      }
-      .aMask1 {
-        position: absolute;
-        display: inline-block;
-        width: 12%;
-        height: 33%;
-        border-radius: 50%;
-        background: rgba(0, 0, 0, 0.2);
-        top: 30%;
-        left: 30%;
-      }
-    </style>
+    <style></style>
   </head>
   <body>
     <main class="home box">
@@ -265,7 +27,13 @@
         <nav class="menu">
           <ul class="menu-list">
             <li class="menu-item">
-              <a class="menu-link" href="#">我與酷獸的大冒險</a>
+              <a
+                class="menu-link"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                >我與酷獸的大冒險</a
+              >
             </li>
             <li class="menu-item">
               <a class="menu-link" href="#">大家的博物館</a>
@@ -295,7 +63,7 @@
           <img src="img/m02.png" alt="" />
           <img src="img/m03.png" alt="" />
           <img src="img/m04.png" alt="" />
-          <<img src="img/m05.png" alt="" />
+          <img src="img/m05.png" alt="" />
         </div>
         <div class="infoTitle">
           <img src="img/indexGif.png" alt="" />
@@ -315,8 +83,54 @@
         </div>
       </div>
     </main>
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+        style="max-width: 80%"
+      >
+        <div class="myModal modal-content ">
+          <div class="modal-header">
+            <div class="ham-origin">
+              <div class="ham-bar ham-bar--top2"></div>
+              <div class="ham-bar ham-bar--bottom2"></div>
+            </div>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <h1>我與酷獸的大冒險</h3>
+              <p>
+                本網站以「發現美是什麼」為核心目標，透過館藏、自然、人文不同領域，將美感構面六大面向融入遊戲探索歷程之中。透過線上任務解謎及遊戲體驗的過程，帶領玩家了解藏品中不同面向的生活知識，繳發玩家學習與創新的能力。
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- partial -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
       integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
