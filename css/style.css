@@ -236,8 +236,9 @@ body {
 .modal-ku {
   width: 80%;
 }
-.myModal {
-  background: rgba(4, 168, 119, 0.61);
+.myModal2 {
+  background-image: url(/img/hamBg.png);
+  background-size: cover;
   color: #fff;
   min-height: 80%;
   border-radius: 20px;
@@ -255,4 +256,31 @@ body {
   transform: translateY(8px);
   transform: rotate(45deg);
   background: #fff;
+}
+.ham-origin2 {
+  position: absolute;
+  box-sizing: content-box;
+  top: 100%;
+  right: 3%;
+  z-index: 999;
+}
+.modal-header2 {
+  position: relative;
+  padding: 1rem 1rem;
+}
+.bodyInfo {
+  padding: 0 23%;
+}
+.bodyInfo h1 {
+  font-family: "cwTeXYen", sans-serif;
+  font-size: 2.4rem;
+  padding: 1rem 0 2rem 0;
+  font-weight: 500;
+  text-align: center;
+}
+.bodyInfo p {
+  font-family: "cwTeXYen", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.8rem;
 }

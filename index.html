@@ -44,7 +44,7 @@
         <video
           poster=""
           id="movTxtAni"
-          class="vid03 zindex-5"
+          class="vid03 zindex-2"
           playsinline
           muted
           loop
@@ -54,10 +54,10 @@
           <!--
             - Video needs to be muted, since Chrome 66+ will not autoplay video with sound.
             WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
-          <source src="mv/indexBg.webm" type="video/webm" />
-          <source src="#" type="video/mp4" />
+          <source src="" type="video/webm" />
+          <source src="mv/indexBg.mp4" type="video/mp4" />
         </video>
-        <div class="indexMenu">
+        <div class="indexMenu zindex-3">
           <a href="3/game.html" class="aMask1 zindex-7"></a>
           <img src="img/m01.png" alt="" />
           <img src="img/m02.png" alt="" />
@@ -76,11 +76,6 @@
             <p class="chatboxBtn">▼</p>
           </div>
         </div>
-        <div class="infoTitle zindex-6">
-          <div>
-            <img src="img/indexStar.png" alt="" />
-          </div>
-        </div>
       </div>
     </main>
     <!-- Button trigger modal -->
@@ -97,24 +92,30 @@
         class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
         style="max-width: 80%"
       >
-        <div class="myModal modal-content ">
-          <div class="modal-header">
-            <div class="ham-origin">
+        <div class="myModal2 modal-content ">
+          <div class="modal-header2">
+            <div class="ham-origin2 " 
+            data-bs-dismiss="modal"
+            aria-label="Close">
               <div class="ham-bar ham-bar--top2"></div>
               <div class="ham-bar ham-bar--bottom2"></div>
             </div>
-            <button
+            <!-- <button
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
-            ></button>
+            ></button> -->
           </div>
           <div class="modal-body">
+            <div class="bodyInfo">
             <h1>我與酷獸的大冒險</h3>
+              <p>館藏的碧玉如意為什麼不見？荷花池又為什麼變黑白？</p>
+              <p>快跟著酷獸的腳步，一起搜集「美」的線索，找回碧玉如意吧！</p>
               <p>
-                本網站以「發現美是什麼」為核心目標，透過館藏、自然、人文不同領域，將美感構面六大面向融入遊戲探索歷程之中。透過線上任務解謎及遊戲體驗的過程，帶領玩家了解藏品中不同面向的生活知識，繳發玩家學習與創新的能力。
+                本網站以「發現美是什麼」為核心目標，透過館藏、自然、人文不同領域，將美感構面六大面向融入遊戲探索歷程之中。透過線上任務解謎及遊戲體驗的過程，帶領玩家了解藏品中不同面向的生活知識，激發玩家學習與創新的能力。
               </p>
+            </div>
           </div>
         </div>
       </div>
