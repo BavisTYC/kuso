@@ -237,7 +237,7 @@ body {
   width: 80%;
 }
 .myModal2 {
-  background-image: url(/img/hamBg.png);
+  background-image: url(img/hamBg.png);
   background-size: cover;
   color: #fff;
   min-height: 80%;
