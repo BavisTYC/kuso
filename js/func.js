@@ -1,9 +1,13 @@
+var webURL = window.location.href;
+webURL = webURL.substring(0, webURL.lastIndexOf('/'));
 const imageWidth = 1920, imageHeight = 1080;
 var gameLevel = 0;
 var player;
 var dialogBox;
+var gameStatus = 'init';
+
 /*
-0 - 荷之門   - s101~s102
+0 - 荷之門   - s101~s102 init -> start -> playing -> dialogBox -> 場景二 -> dialogBox -> flower -> paint
 1 - 木之門   - s201~s202
 2 - 竹之門   - s301~s302
 3 - 五瑞之門 - s401~s402
@@ -15,6 +19,11 @@ var speed = 175;
 if(!isMobile){
     speed*=1.5;
 }
+window.onload = function () {
+    var status = getParameterByName('status');
+    if(status != '' && status != null)
+        gameStatus = status;
+};
 
 function loadScene(scene, name){
     scene.physics.pause();//先暫停否則會連續觸發
@@ -33,7 +42,7 @@ function loadScene(scene, name){
 function setCanvas() {
     var w = document.documentElement.clientWidth;
     var h = document.documentElement.clientHeight;
-    var h2 = w * 0.5628;
+    var h2 = w * 0.5625;
     if (h2 > h) {
         canvasHeight = h;
         canvasWidth = h * 1.78;
@@ -48,28 +57,72 @@ function setCanvas() {
     //console.log(canvasHeight);
 }
 
-window.onload = function () {
-    setCanvas();
-    //設定DIV大小
-    $('#content').width(canvasWidth);
-    $('#content').height(canvasHeight);
-    $('#content2').width(canvasWidth);
-    $('#content2').height(canvasHeight);
-};
-
-var story = [
-    {
-        "id" : "s101-01",
-        "content" : [
-            {
-                "avatar" : "kuso",
-                "words" : "不知道如意在哪裡？"
-            },
-            {
-                "avatar" : "kuso",
-                "words" : "畫作有些部分不見了…發生什麼事了"
-            }
-        ]
-        
+function parseCookie() {
+    var cookieObj = {};
+    var cookieAry = document.cookie.split(';');
+    var cookie;
+    
+    for (var i=0, l=cookieAry.length; i<l; ++i) {
+        cookie = jQuery.trim(cookieAry[i]);
+        cookie = cookie.split('=');
+        cookieObj[cookie[0]] = cookie[1];
     }
-];
+    
+    return cookieObj;
+}
+function getCookie(name) {
+    var value = parseCookie()[name];
+    if (value) {
+        value = decodeURIComponent(value);
+    }
+    return value;
+}
+function setCookie(cname, cvalue) {
+    const exdays = 1;
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + encodeURIComponent(cvalue) + ";" + expires + ";SameSite=Strict;path=/";
+}
+function delCookie(name){
+    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+function setGameLog(key){
+    var logs = getCookie('gameLog');
+    if(logs == null){
+        logs = '';
+    }
+    var result = false;
+    $.each(logs.split('|'), function(index, value){
+        if(key == value){
+            result = true;
+            return false;
+        }
+    });
+    if(!result){
+        logs += key + '|';
+    }
+    setCookie('gameLog', logs);
+}
+function checkGameLog(key){
+    var logs = getCookie('gameLog');
+    if(logs == null){
+        logs = '';
+    }
+    var result = false;
+    $.each(logs.split('|'), function(index, value){
+        if(key == value){
+            result = true;
+            return false;
+        }
+    });
+    return result;
+}
+function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
